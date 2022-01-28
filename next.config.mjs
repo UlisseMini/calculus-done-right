@@ -3,8 +3,6 @@
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 
-import configureMDX from "@next/mdx";
-
 export default {
   reactStrictMode: true,
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
