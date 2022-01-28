@@ -1,13 +1,9 @@
-export { default } from "components/LessonLayout";
-import { genGetStaticProps } from "components/LessonLayout";
-import { cardMemory } from "lib/cards";
 export const meta = {
   title: "Linearity of the Derivative",
   url: import.meta.url,
   deps: ["derivative-limit"],
   cards: [],
 };
-export const getStaticProps = genGetStaticProps(meta);
 
 The derivative is _linear_. Which makes sense if you think in terms of rates of change.
 Linearity means the rate of change of of a sum is the sum of the rates of change. Symbolically
