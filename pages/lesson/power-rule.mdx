@@ -1,0 +1,37 @@
+export { default } from "components/LessonLayout";
+import { genGetStaticProps } from "components/LessonLayout";
+import { cardMemory } from "lib/cards";
+export const meta = {
+  title: "The Power Rule",
+  url: import.meta.url,
+  deps: ["derivative-limit"],
+  cards: [
+    // TODO: generate on the fly
+    cardMemory("Derivative of $x^n$", "$nx^{n-1}$"),
+  ],
+};
+export const getStaticProps = genGetStaticProps(meta);
+
+The power rule states that
+
+$$
+\frac{d}{dx} x^n = nx^{n-1}
+$$
+
+To take a simple example consider $x^1$, according to this law the derivative is $1x^0 = 1$ which it is!
+To see why the power rule is true consider the limit definition of a derivative
+
+$$
+\lim_{h \to 0} \frac{(x+h)^n - x^n}{h}
+$$
+
+We can expand $(x+h)^n$ using the binomial theorem
+
+$$
+\lim_{h \to 0} \frac{(x^n + nx^{n-1}h + h^2(\dots)) - x^n}{h}
+= \lim_{h \to 0} nx^{n-1} + h(\dots)
+$$
+
+Therefor the derivative is $nx^{n-1}$
+
+{/* TODO: Cover product rule proof by induction as well */}

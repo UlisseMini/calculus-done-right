@@ -1,0 +1,10 @@
+:root {
+  /* taken from https://clrs.cc/ */
+  /* TODO: Rename to primary-fg, secondary-fg, etc like a good developer */
+  --white: #ffffff;
+  --gray: #aaaaaa;
+  --light-gray: #eeeeee;
+  --blue: #0074d9;
+  --red: #ff4136;
+  --green: #2ecc40;
+}

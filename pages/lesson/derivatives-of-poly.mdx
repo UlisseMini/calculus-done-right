@@ -1,0 +1,24 @@
+export { default } from "components/LessonLayout";
+import { genGetStaticProps } from "components/LessonLayout";
+import { cardMemory } from "lib/cards";
+export const meta = {
+  title: "Derivatives of Polynomials",
+  url: import.meta.url,
+  deps: ["power-rule", "derivative-linearity"],
+  cards: [
+    // TODO: generate polynomials on the fly
+    cardMemory("Derivative of $3x^2 + 2x$", "$6x + 2$"),
+  ],
+};
+export const getStaticProps = genGetStaticProps(meta);
+
+Taking the derivative of polynomials is just applying linearity and the power rule. An example
+
+$$
+\begin{aligned}
+&\frac{d}{dx}\left(2x^3 + 3x^2 + x + 5\right) \\
+&= 2\frac{d(x^3)}{dx} + 3\frac{d(x^2)}{dx} + \frac{d(x)}{dx} + \frac{d(5)}{dx} \\
+&= 2(3x^2) + 3(2x) + 1 \\
+&= 6x^2 + 6x + 1
+\end{aligned}
+$$

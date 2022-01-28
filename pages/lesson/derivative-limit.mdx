@@ -1,0 +1,29 @@
+export { default } from "components/LessonLayout";
+import { genGetStaticProps } from "components/LessonLayout";
+export const meta = {
+  title: "The Derivative as a limit",
+  url: import.meta.url,
+  deps: ["limits-intro"],
+  cards: [],
+};
+export const getStaticProps = genGetStaticProps(meta);
+
+The derivative of a function $f$ at $x$ (denoted $f'(x)$) is defined as
+
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+$$
+
+There are many ways to think of this, one is to think of the tangent line to $f$
+
+An example: The derivative of $x^2$ being $2x$
+
+$$
+\begin{aligned}
+\lim_{h \to 0} \frac{(x+h)^2 - x^2}{h}
+&= \lim_{h \to 0} \frac{(x^2 + 2xh + h^2) - x^2}{h} \\
+&= \lim_{h \to 0} \frac{2xh + h^2}{h} \\
+&= \lim_{h \to 0}\left(2x + h\right) \\
+&= 2x
+\end{aligned}
+$$

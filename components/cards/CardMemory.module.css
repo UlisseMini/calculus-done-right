@@ -1,0 +1,31 @@
+.card {
+  width: 350px;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 8px;
+  border-top: 2px solid var(--white);
+  border-bottom: 2px solid var(--light-gray);
+}
+
+/* Maybe this should be global? */
+.card p {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.question {
+  height: 50%;
+  width: 100%;
+  background: var(--white);
+  border-left: 8px solid var(--white);
+}
+
+.answer {
+  height: 50%;
+  width: 100%;
+  border-top: 1px solid var(--gray);
+  background: var(--light-gray);
+}

@@ -1,0 +1,19 @@
+.quiz {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.label {
+  display: block;
+}
+
+.correct {
+  color: var(--green);
+}
+.incorrect {
+  color: var(--red);
+}
+.quiz p {
+  margin: 0;
+}

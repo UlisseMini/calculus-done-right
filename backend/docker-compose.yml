@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+
+  database:
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
+
+    env_file:
+      - .env

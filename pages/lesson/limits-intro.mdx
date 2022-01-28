@@ -1,0 +1,41 @@
+export { default } from "components/LessonLayout";
+import { genGetStaticProps } from "components/LessonLayout";
+export const meta = {
+  title: "Introducion to limits",
+  url: import.meta.url,
+  deps: [],
+  cards: [],
+};
+export const getStaticProps = genGetStaticProps(meta);
+import { CartesianCoordinates, Mafs, FunctionGraph, Point } from "mafs";
+
+Limits allow us to talk about what happens as we approach a point on a function,
+while this may seem random the idea of a limit is one of the foundational pillars of calculus.
+
+The idea is there are some pesky functions like $f(x) = (2x + x^2)/x$ which aren't defined somewhere,
+in this case $f(0)$ is not defined because it would cause division by zero.
+
+Let's look at the graph
+
+<Mafs>
+  <CartesianCoordinates />
+  <FunctionGraph.OfX y={(x) => (2 * x + x ** 2) / x} />
+  <Point x={0} y={2} />
+</Mafs>
+
+I've marked the problem point, we can't divide by zero! yet it's almost as if $f(x)$ is begging us to make it two at zero.
+We can divide by $x$ to get
+
+$$
+f(x) = (2x + x^2)/x = 2 + x
+$$
+
+Now obviously if we plug in $x = 0$ we'll get $2$ as desired, then we'd divide by zero!
+The solution is to say _as $x$ approaches two, $f(x)$ approaches zero_.
+
+What does that mean? It means however close to $2$ I want you to get, you can find an $x$ close to zero that satisfies my request.
+
+For example: If I wanted to get within $0.01$ of $2$ you might pick $x = 0.001$.
+_No matter how close I want to get, you can get me that close_
+
+{/* TODO: epsilon delta limit animation */}

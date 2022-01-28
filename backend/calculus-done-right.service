@@ -1,0 +1,18 @@
+[Unit]
+Description=Calculus done right backend
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/uli/.local/bin/poetry run uvicorn app.main:app --host 127.0.0.1 --port 8002
+WorkingDirectory=/home/uli/calculus-done-right/backend
+EnvironmentFile=/home/uli/calculus-done-right/.env
+
+Restart=always
+RestartSec=3
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target
+
