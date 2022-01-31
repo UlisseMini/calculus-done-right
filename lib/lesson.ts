@@ -2,7 +2,7 @@ import { CardData, CardDataMemory } from "./cards";
 
 export type Meta = {
   title: string;
-  url: string;
+  slug: string;
   deps: string[];
   cards: CardData<any>[];
 };
@@ -16,8 +16,11 @@ export function validateMeta(m: any) {
       `want title to be a string, got ${m.title} (${typeof m.title})`
     );
   }
-  if (typeof m.url !== "string") {
-    throw Error(`want url string got ${m.url}`);
+  if (typeof m.slug !== "string") {
+    throw Error(`want slug string got ${m.slug}`);
+  }
+  if (m.slug.includes("/")) {
+    throw Error(`slug '${m.slug}' includes a /, is it a path?`);
   }
 
   if (!Array.isArray(m.deps)) {

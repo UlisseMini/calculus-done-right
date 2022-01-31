@@ -9,7 +9,6 @@ import { GetStaticProps } from "next";
 
 type Props = Meta & {
   children: ReactElement[];
-  slug: string;
   depMetas: Meta[];
 };
 
@@ -48,16 +47,11 @@ export default function LessonLayout(props: Props) {
 }
 
 export const genGetStaticProps = (meta: Meta): GetStaticProps => {
-  const slug = meta.url.split("/").at(-1)?.replace(/\..+/, "");
-
-  // for debugging
-  if (!slug || slug.match(/(pages|mdx|\..+$)/) || slug.length < 5) {
-    throw Error(`incorrect slug "${slug}" url ${meta.url}`);
-  }
+  validateMeta(meta);
 
   return async () => {
     const depMetas = await Promise.all(meta.deps.map(slugToMeta));
 
-    return { props: { ...meta, depMetas, slug } };
+    return { props: { ...meta, depMetas } };
   };
 };
