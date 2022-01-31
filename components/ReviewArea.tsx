@@ -3,7 +3,7 @@ import styles from "./ReviewArea.module.css";
 import Button from "./Button";
 import Card from "./Card";
 import { useStore } from "lib/store";
-import { Meta, slugToMeta } from "lib/lesson";
+import { Meta, importMeta } from "lib/lesson";
 
 type State = { type: "loading" } | { type: "ready"; metas: Meta[] };
 
@@ -14,7 +14,7 @@ export default function ReviewArea() {
   useEffect(() => {
     (async () => {
       // FIXME: Broken because of https://github.com/UlisseMini/nextjs-dynamic-import-meta-export
-      const metas = await Promise.all(finishedLessons.map(slugToMeta));
+      const metas = await Promise.all(finishedLessons.map(importMeta));
       setState({ type: "ready", metas });
     })();
   }, []);

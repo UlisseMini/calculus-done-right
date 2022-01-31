@@ -27,7 +27,7 @@ export function validateMeta(m: any): Meta {
   return m;
 }
 
-export async function slugToMeta(slug: string): Promise<Meta> {
+export async function importMeta(slug: string): Promise<Meta> {
   const meta = (await import(`pages/lesson/${slug}.mdx`)).meta;
   // TODO: only in dev? not sure if next is smart enough to optimize out if
   // i used if (!process.browser)...

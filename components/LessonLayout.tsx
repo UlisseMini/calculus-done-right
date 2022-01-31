@@ -1,7 +1,7 @@
 import { CardData, CardDataMemory } from "lib/cards";
 import { ReactElement } from "react";
 import Layout from "./Layout";
-import { Meta, slugToMeta, validateMeta } from "lib/lesson";
+import { Meta, importMeta, validateMeta } from "lib/lesson";
 import Link from "next/link";
 import Button from "./Button";
 import { useStore } from "lib/store";
@@ -50,7 +50,7 @@ export const genGetStaticProps = (meta: Meta): GetStaticProps => {
   validateMeta(meta);
 
   return async () => {
-    const depMetas = await Promise.all(meta.deps.map(slugToMeta));
+    const depMetas = await Promise.all(meta.deps.map(importMeta));
 
     return { props: { ...meta, depMetas } };
   };
