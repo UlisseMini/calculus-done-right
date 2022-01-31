@@ -1,4 +1,6 @@
 import fs from "fs/promises";
+import { slugToMeta } from "lib/lesson";
+import { assert } from "lib/utils";
 import type { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import HomeAnimation from "../components/HomeAnimation";
@@ -35,16 +37,17 @@ const Home: NextPage = ({ pages }: any) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const fileNames = await fs.readdir("pages/lesson");
 
   const pages = [];
   for (const fileName of fileNames) {
-    const imports = await import(`pages/lesson/${fileName}`);
     const slug = fileName.replace(/\.mdx$/, "");
+    const meta = await slugToMeta(slug);
+    assert(() => slug === meta.slug, `${slug} !== ${meta.slug}`);
     pages.push({
       href: `/lesson/${slug}`,
-      ...imports.meta,
+      ...meta,
     });
   }
 

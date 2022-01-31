@@ -2,6 +2,7 @@ import { CardData } from "./cards";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { slugToMeta } from "./lesson";
 
 // TODO: Only show lessons where you have the required deps
 
@@ -13,8 +14,7 @@ type CardIdentifier = {
 
 // TODO: cache this
 export async function cardFromID(id: CardIdentifier): Promise<CardData<any>> {
-  const meta = (await import(`pages/lesson/${id.lesson}.mdx`)).meta;
-  return meta.cards[id.index];
+  return (await slugToMeta(id.lesson)).cards[id.index];
 }
 
 interface Review {
