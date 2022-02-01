@@ -1,36 +1,58 @@
 import { CardData, CardDataMemory } from "lib/cards";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Layout from "./Layout";
 import { Meta, importMeta, validateMeta } from "lib/lesson";
 import Link from "next/link";
 import Button from "./Button";
 import { useStore } from "lib/store";
 import { GetStaticProps } from "next";
+import { plural } from "lib/utils";
 
 type Props = Meta & {
   children: ReactElement[];
   depMetas: Meta[];
 };
 
-export default function LessonLayout(props: Props) {
-  const slug = props.slug;
-  const finishLesson = useStore((store) => store.finishLesson);
-  const lessonIsFinished = useStore((store) => store.lessonIsFinished);
+type State = { type: "loading" } | { type: "ready"; lessonFinished: boolean };
 
-  function finish() {
-    finishLesson(slug);
-  }
+function FinishButton({ onClick, cardsLength, lessonFinished }: any) {
+  return lessonFinished ? (
+    <Button disabled>
+      {`Lesson finished (${plural(cardsLength, "card")} in review)`}
+    </Button>
+  ) : (
+    <Button onClick={onClick}>
+      {`Finish Lesson (adds ${plural(cardsLength, "card")} to review)`}
+    </Button>
+  );
+}
+
+export default function LessonLayout(props: Props) {
+  // useEffect needed since localStorage isn't available serverside, and next really hates hydration mismatches
+  const { slug, cards, title, deps, depMetas, children } = props;
+  const finishLesson = useStore((store) => store.finishLesson);
+  // WARNING: Do not use finishedLessons outside useEffect or you might get
+  // hydration mismatches which lead to obscure bugs and hair pulling
+  const finishedLessons = useStore((store) => store.finishedLessons);
+
+  // useEffect needed since localStorage isn't available serverside,
+  // and next really hates hydration mismatches (and will punish you with obscure bugs)
+  const [state, setState] = useState<State>({ type: "loading" });
+  useEffect(() => {
+    const lessonFinished = finishedLessons.includes(slug);
+    setState({ type: "ready", lessonFinished });
+  }, [finishedLessons]);
 
   return (
     <Layout>
-      <h1>{props.title}</h1>
+      <h1>{title}</h1>
       <span>Prerequisites: </span>
-      {props.deps.length > 0 ? (
+      {deps.length > 0 ? (
         <ul>
-          {props.deps.map((dep, i) => (
+          {deps.map((dep, i) => (
             <li key={i}>
               <Link href={`/lesson/${dep}`}>
-                <a>{props.depMetas[i].title}</a>
+                <a>{depMetas[i].title}</a>
               </Link>
             </li>
           ))}
@@ -38,10 +60,16 @@ export default function LessonLayout(props: Props) {
       ) : (
         <span>None</span>
       )}
-      <div>{props.children}</div>
-      <Button onClick={finish} disabled={lessonIsFinished(slug)}>
-        Finish Lesson
-      </Button>
+      <div>{children}</div>
+      {state.type === "ready" ? (
+        <FinishButton
+          onClick={() => finishLesson(slug)}
+          cardsLength={cards.length}
+          lessonFinished={state.lessonFinished}
+        />
+      ) : (
+        <></>
+      )}
     </Layout>
   );
 }

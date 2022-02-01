@@ -13,16 +13,26 @@ export default function ReviewArea() {
 
   useEffect(() => {
     (async () => {
-      // FIXME: Broken because of https://github.com/UlisseMini/nextjs-dynamic-import-meta-export
       const metas = await Promise.all(finishedLessons.map(importMeta));
       setState({ type: "ready", metas });
     })();
-  }, []);
+  }, [finishedLessons]);
 
   if (state.type === "loading") {
     return <p>Loading ReviewArea...</p>;
   } else if (state.type === "ready") {
-    return <pre>{JSON.stringify(state.metas, null, 2)}</pre>;
+    const cards = state.metas.map((meta) => meta.cards).flat();
+
+    return (
+      <>
+        {cards.map((card) => (
+          <Card
+            card={card}
+            onAnswer={(success) => alert(`success: ${success}`)}
+          />
+        ))}
+      </>
+    );
   } else {
     throw Error("unreachable");
   }

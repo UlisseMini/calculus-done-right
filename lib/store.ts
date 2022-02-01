@@ -29,7 +29,6 @@ type State = {
   finishedLessons: string[]; // finishing a lesson DOES NOT INCLUDE card reviews
   recordReview: (review: Review) => void;
   finishLesson: (lesson: string) => void;
-  lessonIsFinished: (lesson: string) => boolean;
 };
 
 export const useStore = create<State>(
@@ -47,8 +46,6 @@ export const useStore = create<State>(
             ? draft.finishedLessons
             : [...draft.finishedLessons, lesson],
         })),
-      lessonIsFinished: (lesson: string) =>
-        get().finishedLessons.includes(lesson),
     }),
     { name: "store" }
   )

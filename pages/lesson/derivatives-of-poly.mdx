@@ -1,10 +1,15 @@
-import { cardMemory } from "lib/cards";
+import { cardMemory, cardMult } from "lib/cards";
 export const meta = {
   title: "Derivatives of Polynomials",
   deps: ["power-rule", "derivative-linearity"],
   cards: [
     // TODO: generate polynomials on the fly
     cardMemory("Derivative of $3x^2 + 2x$", "$6x + 2$"),
+    cardMult(
+      "Derivative of $2x^5 - 3x^2$",
+      ["$10x^4 - 6x$", "$\\frac{2x^6}{6} - x^3$", "$3x^4 - 3x$"],
+      "Apply the power rule and linearity"
+    ),
   ],
 };
 

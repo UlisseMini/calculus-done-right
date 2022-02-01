@@ -4,3 +4,6 @@ export const assert = (checkFn: () => boolean, msg?: string) => {
     throw Error(`assertion ${checkString} failed${msg ? ": " + msg : ""}`);
   }
 };
+
+export const plural = (num: number, word: string) =>
+  `${num} ${word}${num !== 1 ? "s" : ""}`;
