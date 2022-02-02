@@ -18,10 +18,16 @@ export const useClientDimensions = () => {
   });
 
   useEffect(() => {
-    setDims({
-      clientHeight: document.documentElement.clientHeight,
-      clientWidth: document.documentElement.clientWidth,
-    });
+    const onResize = () => {
+      console.log(dims);
+      setDims({
+        clientHeight: document.documentElement.clientHeight,
+        clientWidth: document.documentElement.clientWidth,
+      });
+    };
+    window.addEventListener("resize", onResize);
+    onResize(); // fire it once to get started
+    return () => document.removeEventListener("resize", onResize);
   }, []);
 
   return dims;
