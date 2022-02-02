@@ -41,7 +41,7 @@ export default function LessonLayout(props: Props) {
   useEffect(() => {
     const lessonFinished = finishedLessons.includes(slug);
     setState({ type: "ready", lessonFinished });
-  }, [finishedLessons]);
+  }, [finishedLessons, slug]);
 
   return (
     <Layout>

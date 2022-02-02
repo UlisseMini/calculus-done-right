@@ -25,8 +25,9 @@ export default function ReviewArea() {
 
     return (
       <>
-        {cards.map((card) => (
+        {cards.map((card, i) => (
           <Card
+            key={i}
             card={card}
             onAnswer={(success) => alert(`success: ${success}`)}
           />
