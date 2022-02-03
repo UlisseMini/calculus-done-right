@@ -19,7 +19,6 @@ export const useClientDimensions = () => {
 
   useEffect(() => {
     const onResize = () => {
-      console.log(dims);
       setDims({
         clientHeight: document.documentElement.clientHeight,
         clientWidth: document.documentElement.clientWidth,
