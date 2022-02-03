@@ -1,10 +1,8 @@
 import { CardData } from "./cards";
-import create from "zustand";
+import create, { StateSelector } from "zustand";
 import { persist } from "zustand/middleware";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { importMeta } from "./lesson";
-
-// TODO: Only show lessons where you have the required deps
 
 type Time = number;
 type CardIdentifier = {
@@ -50,6 +48,17 @@ export const useStore = create<State>(
     { name: "store" }
   )
 );
+
+export const useStoreDefault = <U>(
+  selector: StateSelector<State, U>,
+  defaultValue: U
+) => {
+  const [value, setValue] = useState(defaultValue);
+  const zustandValue = useStore(selector);
+  useEffect(() => setValue(zustandValue), [zustandValue]);
+
+  return value;
+};
 
 /*
 export function useReviews() {

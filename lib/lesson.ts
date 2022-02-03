@@ -34,3 +34,24 @@ export async function importMeta(slug: string): Promise<Meta> {
   validateMeta(meta);
   return meta;
 }
+
+export enum Status {
+  Finished,
+  ReadyToLearn,
+  NotReadyToLearn,
+}
+
+export const havePrereqs = (meta: Meta, finishedLessons: string[]): boolean =>
+  meta.deps.every((dep) => finishedLessons.includes(dep));
+
+export const status = (meta: Meta, finishedLessons: string[]) => {
+  if (finishedLessons.includes(meta.slug)) {
+    return Status.Finished;
+  } else {
+    return havePrereqs(meta, finishedLessons)
+      ? Status.ReadyToLearn
+      : Status.NotReadyToLearn;
+  }
+};
+
+export const href = (slug: string) => `/lesson/${slug}`;
