@@ -6,8 +6,7 @@ I know this is possible since I taught myself AP calculus in ~2-3 months from kh
 
 ## Contributing
 
-Seeing my vision through will be hard, It'll likely take thousands of hours of work.
-I'm spending a minimum of [3 hours a day](https://www.beeminder.com/valvate/calculus-done-right) working on it but I'm one person and I suck at web development! if you're interested in contributing code, advice or anything really join our [Discord](https://discord.gg/N7Ka6tPjeR) and read our [issues](https://github.com/UlisseMini/calculus-done-right/issues) :D
+I'm one person and I suck at web development! if you're interested in contributing code, advice or anything really join our [Discord](https://discord.gg/N7Ka6tPjeR) and read our [issues](https://github.com/UlisseMini/calculus-done-right/issues) :D
 
 ## Design
 
